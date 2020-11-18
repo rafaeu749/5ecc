@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>5e Character Creator</title>
+    <style>
+        body {
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+    </style>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body>
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
+
+    <div class="container-sm">
+        <h1>5eCC</h1>
+        <h5><marquee>by Rafaeu749</marquee></h5>
+    </div>
+
+    <div id="divCreator" class="container-sm">
+    </div>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+
+    <script src="./js/babel.min.js"></script>
+
+    <!-- jQuery and JS bundle w/ Popper.js -->
+    <script src="./js/jquery-3.5.1.slim.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/babel">
+        class Creator extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { name: '' };
+
+                this.handleChange = this.handleChange.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({ name: event.target.value });
+            }
+
+            handleSubmit(event) {
+                event.preventDefault();
+                return false;
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group row">
+                            <label for="name" className="col-sm-2 col-form-label">Nome:</label>
+                            <div className="col-sm-10">
+                                <input type="text" id="name" className="form-control" aria-describedby="nameHelp"
+                                    value={this.state.name} onChange={this.handleChange} autoComplete="off" />
+                            </div>
+                            <small id="nameHelp" className="form-text text-muted">Nome do personagem: {this.state.name}.</small>
+                        </div>
+                    </form>
+                );
+            }
+        }
+
+        const rootElement = document.getElementById('divCreator');
+
+        ReactDOM.render(
+            <Creator />,
+            rootElement);
+    </script>
+</body>
+</html>
